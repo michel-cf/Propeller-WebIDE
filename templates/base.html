@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% if settings.USE_CDN %}
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"
+              type="text/css">
+    {% else %}
+        <!-- TODO: local scripts -->
+    {% endif %}
+
+    {% block head %}{% endblock %}
+    <title>{% block title %}Propeller WebIDE{% endblock %}</title>
+</head>
+<body>
+
+{% if user.is_authenticated %}
+    <p>Welcome {{ user.username }} !!! <a href="{% url 'account_logout' %}" >Logout</a></p>
+{% else %}
+    <p>Welcome, please <a href="{% url 'account_login' %}" >login</a> or <a href="{% url 'account_signup' %}" >register</a></p>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+[client]
+database = webide
+user = webide
+password = webide
+host = localhost
+default-character-set = utf8
