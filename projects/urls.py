@@ -21,5 +21,6 @@ import views
 
 app_name = 'projects'
 urlpatterns = [
-
+    url(r'^create.html$', views.create, name='create'),
+    url(r'^create.do$', views.doCreate, name='do-create'),
 ]

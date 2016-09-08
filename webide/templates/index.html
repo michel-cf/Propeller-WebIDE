@@ -11,4 +11,11 @@
 
     </ul>
 
+    {% if user.is_authenticated %}
+        <a href="{% url 'projects:create' %}">Create new project</a>
+    <ul id="project-list">
+
+    </ul>
+    {% endif %}
+
 {% endblock %}
