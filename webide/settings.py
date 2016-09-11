@@ -9,11 +9,25 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-
+import logging
 import os
 
+from ConfigParser import ConfigParser
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from logging.config import dictConfig
+
+import raven
+from raven.contrib.django.handlers import SentryHandler
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+config = ConfigParser({
+    "project": {
+        "root": "/var/data/webide/"
+    }
+})
+config.read(os.path.expanduser('~/propeller-webide.cnf'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,6 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'raven.contrib.django.raven_compat',
+
     'stronghold',
     'django.contrib.sites',
 
@@ -48,6 +64,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.google',
+
+    'bootstrap3',
 
     'webide',
     'projects',
@@ -178,6 +196,66 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'WARNING', # To capture more than ERROR, change to WARNING, INFO, etc.
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+            'tags': {'custom-tag': 'x'},
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'root': {
+            'level': 'WARNING',
+            'handlers': ['sentry'],
+        },
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
+}
+
+
+dictConfig(LOGGING)
+
+RAVEN_CONFIG = {
+    'dsn': 'https://24696074976a4813be9c5f200512b1e8:5fbc53115f564787a6cf9d426d79aa10@sentry.io/98255',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.join(os.path.dirname(__file__), '..')),
+}
+
+handler = SentryHandler('https://16079d12cd38464c9fdf4fd6850913e7:7a7b85029608440687131e61e88a1fb7@sentry.io/53555')
+raven.setup_logging(handler)
+
+# Propeller WebIDE settings
+WEBIDE_GIT_ROOT = config.get("project", "root")
 
 # Export settings to use in templates
 SETTINGS_EXPORT = [
