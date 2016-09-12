@@ -1,0 +1,120 @@
+@main-color-back: #3384bb;
+@main-color-front: #ffffff;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #editor, #workspace {
+  height:100%;
+  width: 100%;
+  position: absolute;
+}
+
+.widget {
+  background-color: @main-color-back;
+  color: @main-color-front;
+}
+
+#editor {
+  width: 100%;
+}
+
+
+#screen {
+  top: 0px;
+  left: 50px;
+  right: 50px;
+  bottom: 50px;
+  position: absolute;
+  background-color: #79aec8;
+}
+
+#screen .widget {
+  position: relative;
+  float: left;
+  width: 300px;
+  margin-right: 10px;
+}
+
+#workspace {
+  top: 10%;
+  height: 90%;
+  bottom: 30px;
+}
+
+#compile-log {
+  position: absolute;
+  width: 80%;
+  bottom: 0;
+  left: 10%;
+}
+
+
+.sidebar {
+  display: none;
+  top: 0;
+  bottom: 80px;
+  width: 30px;
+  position: absolute;
+}
+
+.sidebar h4 {
+  position: relative;
+ // -webkit-transform: rotate(-90deg);
+ // -moz-transform: rotate(-90deg);
+ // -ms-transform: rotate(-90deg);
+ // -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+
+  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+ // -webkit-transform-origin: 0% 50%;
+ // -moz-transform-origin: 50% 50%;
+ // -ms-transform-origin: 50% 50%;
+ // -o-transform-origin: 50% 50%;
+  transform-origin: right bottom;
+ // transform: rotate(270deg);
+ // transform-origin: left top 0;
+
+
+  margin-left: -200px;
+  padding-bottom: 5px;
+  text-align: right;
+ // margin-bottom: 200px;
+}
+
+.sidebar .sidebar-content {
+  position: relative;
+  width: 30px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  display: block;
+}
+
+#left-side-bar {
+  float: left;
+}
+
+#right-side-bar {
+  right: 0;
+}
+
+
+#compile-log.collapsed {
+  height: 30px;
+}
+
+.widget-title {
+  height: 30px;
+  width: 100%;
+}
+
+.widget-title h4 {
+  padding-left: 10px;
+  padding-top: 8px;
+}
+
