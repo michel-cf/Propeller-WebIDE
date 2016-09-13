@@ -12,9 +12,13 @@ html, body, #editor, #workspace {
   position: absolute;
 }
 
-.widget {
+.widget-title, .sidebar-title {
   background-color: @main-color-back;
   color: @main-color-front;
+}
+
+.widget {
+  background-color: #79aec8;
 }
 
 #editor {
@@ -28,14 +32,17 @@ html, body, #editor, #workspace {
   right: 50px;
   bottom: 50px;
   position: absolute;
-  background-color: #79aec8;
 }
 
-#screen .widget {
-  position: relative;
+#screen .widget-container {
   float: left;
-  width: 300px;
-  margin-right: 10px;
+  height: 100%;
+  position: relative;
+
+}
+
+#screen #second-editor.widget-container {
+  float: right;
 }
 
 #workspace {
@@ -53,14 +60,22 @@ html, body, #editor, #workspace {
 
 
 .sidebar {
-  display: none;
+  display: block;
   top: 0;
   bottom: 80px;
   width: 30px;
   position: absolute;
 }
 
-.sidebar h4 {
+
+.sidebar .sidebar-title {
+  position: relative;
+  width: 30px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-title h4 {
   position: relative;
  // -webkit-transform: rotate(-90deg);
  // -moz-transform: rotate(-90deg);
@@ -84,15 +99,8 @@ html, body, #editor, #workspace {
  // margin-bottom: 200px;
 }
 
-.sidebar .sidebar-content {
-  position: relative;
-  width: 30px;
-  height: 100%;
-  overflow: hidden;
-}
-
-.sidebar.collapsed {
-  display: block;
+.sidebar.collapsed .sidebar-content {
+  display: none;
 }
 
 #left-side-bar {
@@ -108,6 +116,12 @@ html, body, #editor, #workspace {
   height: 30px;
 }
 
+.widget {
+  margin-left: 10px;
+  height: 100%;
+  position: relative;
+}
+
 .widget-title {
   height: 30px;
   width: 100%;
@@ -118,3 +132,6 @@ html, body, #editor, #workspace {
   padding-top: 8px;
 }
 
+.widget-container.width-6 {
+  width: 50%;
+}
