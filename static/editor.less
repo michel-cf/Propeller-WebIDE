@@ -25,9 +25,8 @@ html, body, #editor, #workspace {
   width: 100%;
 }
 
-
 #screen {
-  top: 0px;
+  top: 0;
   left: 50px;
   right: 50px;
   bottom: 50px;
@@ -99,7 +98,15 @@ html, body, #editor, #workspace {
  // margin-bottom: 200px;
 }
 
-.sidebar.collapsed .sidebar-content {
+body.explorer #left-side-bar {
+
+
+  .sidebar-content {
+    display: block;
+  }
+}
+
+.sidebar .sidebar-content {
   display: none;
 }
 
@@ -117,9 +124,12 @@ html, body, #editor, #workspace {
 }
 
 .widget {
-  margin-left: 10px;
   height: 100%;
   position: relative;
+}
+
+#second-editor .widget {
+  margin-left: 10px;
 }
 
 .widget-title {
