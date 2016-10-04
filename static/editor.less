@@ -17,7 +17,7 @@ html, body, #editor, #workspace {
   color: @main-color-front;
 }
 
-.widget {
+.widget, .sidebar {
   background-color: #79aec8;
 }
 
@@ -31,6 +31,14 @@ html, body, #editor, #workspace {
   right: 50px;
   bottom: 50px;
   position: absolute;
+}
+
+body.left-side-bar #screen {
+  left: 220px;
+}
+
+body.right-side-bar #screen {
+  right: 220px;
 }
 
 #screen .widget-container {
@@ -59,56 +67,71 @@ html, body, #editor, #workspace {
 
 
 .sidebar {
+  z-index: 10;
   display: block;
   top: 0;
   bottom: 80px;
-  width: 30px;
+  width: 200px;
   position: absolute;
-}
 
+  .sidebar-title {
+    position: relative;
+    width: 200px;
+    height: 30px;
+    overflow: hidden;
 
-.sidebar .sidebar-title {
-  position: relative;
-  width: 30px;
-  height: 100%;
-  overflow: hidden;
-}
-
-.sidebar.collapsed .sidebar-title h4 {
-  position: relative;
- // -webkit-transform: rotate(-90deg);
- // -moz-transform: rotate(-90deg);
- // -ms-transform: rotate(-90deg);
- // -o-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-
-  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
- // -webkit-transform-origin: 0% 50%;
- // -moz-transform-origin: 50% 50%;
- // -ms-transform-origin: 50% 50%;
- // -o-transform-origin: 50% 50%;
-  transform-origin: right bottom;
- // transform: rotate(270deg);
- // transform-origin: left top 0;
-
-
-  margin-left: -200px;
-  padding-bottom: 5px;
-  text-align: right;
- // margin-bottom: 200px;
-}
-
-body.explorer #left-side-bar {
-
+    h4 {
+      padding-left: 10px;
+      padding-top: 8px;
+    }
+  }
 
   .sidebar-content {
-    display: block;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 }
 
-.sidebar .sidebar-content {
-  display: none;
+.sidebar.collapsed {
+  width: 30px;
+
+  .sidebar-title {
+    width: 30px;
+    height: 100%;
+
+    h4 {
+      position: relative;
+      // -webkit-transform: rotate(-90deg);
+      // -moz-transform: rotate(-90deg);
+      // -ms-transform: rotate(-90deg);
+      // -o-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+
+      /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+      // -webkit-transform-origin: 0% 50%;
+      // -moz-transform-origin: 50% 50%;
+      // -ms-transform-origin: 50% 50%;
+      // -o-transform-origin: 50% 50%;
+      transform-origin: right bottom;
+      // transform: rotate(270deg);
+      // transform-origin: left top 0;
+
+
+      margin-left: -200px;
+      padding-bottom: 5px;
+      text-align: right;
+      // margin-bottom: 200px;
+    }
+  }
+
+  .sidebar-content {
+    display: none;
+  }
 }
+
 
 #left-side-bar {
   float: left;
@@ -144,4 +167,20 @@ body.explorer #left-side-bar {
 
 .widget-container.width-6 {
   width: 50%;
+}
+
+.widget-content {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.ace-editor, #project-file-tree {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

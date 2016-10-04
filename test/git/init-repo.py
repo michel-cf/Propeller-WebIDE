@@ -50,20 +50,19 @@ print(git_repo.untracked_files)
 
 git_repo.index.commit('Added warning', committer=committer)
 
-# Find history
+# Find history of a given file
 commits_touching_path = list(git_repo.iter_commits(paths=[test_file_name]))
+
 
 for commit in commits_touching_path:
     print(commit)
-    try:
+    # Do not use the full path here, only the one relative to the git repo location!!!
+    print((commit.tree / 'test.txt').data_stream.read())
 
-        print((commit.tree / 'test.txt').data_stream.read())
-    except KeyError:
-        print('did not work')
 
-'''
+# Or  retrieving commits and commits in one go
 revlist = (
-    (commit, (commit.tree / test_file_name).data_stream.read())
+    (commit, (commit.tree / 'test.txt').data_stream.read())
     for commit in git_repo.iter_commits(paths=test_file_name)
 )
 
@@ -71,4 +70,3 @@ revlist = (
 for commit, filecontents in revlist:
     print(commit)
     print(filecontents)
-'''

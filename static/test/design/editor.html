@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../../libs/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../libs/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../libs/jstree/dist/jstree.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../libs/jstree/dist/themes/default/style.css" />
+    <script src="editor.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../editor.css"/>
+</head>
+<body class="no-explorer terminal">
+
+
+<div id="project-settings"></div>
+
+
+<div id="editor">
+    <div id="workspace">
+        <div id="left-side-bar" class="sidebar collapsed">
+            <div class="sidebar-title"><h4>Project explorer</h4></div>
+            <div class="sidebar-content">
+                <div id="project-file-tree">
+                    <ul>
+                        <li>Root node 1
+                            <ul>
+                                <li id="child_node_1">Child node 1</li>
+                                <li>Child node 2</li>
+                            </ul>
+                        </li>
+                        <li>Root node 2</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen">
+            <div id="main-editor" class="widget-container width-6">
+                <div class="widget">
+                    <div class="widget-title"><h4>Editor: <span id="main-editor-filename"
+                                                            class="filename">file.c</span></h4></div>
+                    <div class="widget-content">
+                        <div id="ace-main-editor" class="ace-editor">Hallo</div>
+                    </div>
+                </div>
+            </div>
+            <div id="second-editor" class="widget-container width-6">
+                <div class="widget">
+                    <div class="widget-title"><h4>Editor: <span id="second-editor-filename"
+                                                            class="filename">file.h</span></h4></div>
+                    <div class="widget-content">
+                        <div id="ace-second-editor" class="ace-editor">Hallo</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="right-side-bar" class="sidebar collapsed">
+            <div class="sidebar-title"><h4>Serial terminal</h4></div>
+            <div class="sidebar-content">
+                Baud rate
+            </div>
+        </div>
+    </div>
+
+    <div id="compile-log" class="widget collapsed">
+        <div class="widget">
+            <div class="widget-title"><div class="widget-title"><h4>Compile log</h4></div></div>
+            <div class="widget-content">Hallo</div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>
