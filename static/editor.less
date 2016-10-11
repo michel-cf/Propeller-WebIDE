@@ -1,6 +1,8 @@
 @main-color-back: #3384bb;
 @main-color-front: #ffffff;
+@second-color-back: #79aec8;
 
+// ----------------- reset and init
 * {
   margin: 0;
   padding: 0;
@@ -12,60 +14,55 @@ html, body, #editor, #workspace {
   position: absolute;
 }
 
+// ------------------ set colors
 .widget-title, .sidebar-title {
   background-color: @main-color-back;
   color: @main-color-front;
 }
 
 .widget, .sidebar {
-  background-color: #79aec8;
+  background-color: @second-color-back;
 }
 
+// ------------------- Editor
 #editor {
   width: 100%;
-}
 
-#screen {
-  top: 0;
-  left: 50px;
-  right: 50px;
-  bottom: 50px;
-  position: absolute;
-}
+  #workspace {
+    top: 10%;
+    height: 90%;
+    bottom: 30px;
 
-body.left-side-bar #screen {
-  left: 220px;
-}
+    #screen {
+      top: 0;
+      left: 50px;
+      right: 50px;
+      bottom: 50px;
+      position: absolute;
 
-body.right-side-bar #screen {
-  right: 220px;
-}
+      .widget-container {
+        float: left;
+        height: 100%;
+        position: relative;
 
-#screen .widget-container {
-  float: left;
-  height: 100%;
-  position: relative;
-
+      }
+    }
+  }
 }
 
 #screen #second-editor.widget-container {
   float: right;
 }
 
-#workspace {
-  top: 10%;
-  height: 90%;
-  bottom: 30px;
+body.left-side-bar #editor #workspace #screen {
+  left: 220px;
 }
 
-#compile-log {
-  position: absolute;
-  width: 80%;
-  bottom: 0;
-  left: 10%;
+body.right-side-bar #editor #workspace #screen {
+  right: 220px;
 }
 
-
+// ----------------------------- sidebar
 .sidebar {
   z-index: 10;
   display: block;
@@ -73,12 +70,14 @@ body.right-side-bar #screen {
   bottom: 80px;
   width: 200px;
   position: absolute;
+  border-bottom: 5px solid #ffffff;
 
   .sidebar-title {
     position: relative;
     width: 200px;
     height: 30px;
     overflow: hidden;
+    cursor: pointer;
 
     h4 {
       padding-left: 10px;
@@ -132,7 +131,6 @@ body.right-side-bar #screen {
   }
 }
 
-
 #left-side-bar {
   float: left;
 }
@@ -141,42 +139,63 @@ body.right-side-bar #screen {
   right: 0;
 }
 
-
-#compile-log.collapsed {
-  height: 30px;
+// ----------------------------- Widget
+.widget-container.width-6 {
+  width: 50%;
 }
 
 .widget {
   height: 100%;
   position: relative;
+
+  .widget-title {
+    height: 30px;
+    width: 100%;
+
+    h4 {
+      padding-left: 10px;
+      padding-top: 8px;
+    }
+  }
+
+  .widget-content {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
 }
 
 #second-editor .widget {
   margin-left: 10px;
 }
 
-.widget-title {
-  height: 30px;
-  width: 100%;
-}
-
-.widget-title h4 {
-  padding-left: 10px;
-  padding-top: 8px;
-}
-
-.widget-container.width-6 {
-  width: 50%;
-}
-
-.widget-content {
+// ----------------------------- Compile log
+#compile-log {
   position: absolute;
-  top: 30px;
-  right: 0;
+  width: 80%;
   bottom: 0;
-  left: 0;
+  left: 10%;
+  height: 60%;
+  z-index: 20;
+  border: 5px solid #ffffff;
+  border-bottom: none;
+
+  .widget-title {
+    cursor: pointer;
+  }
 }
 
+#compile-log.collapsed {
+  height: 30px;
+
+  .widget-content {
+    display: none;
+  }
+}
+
+// ----------------------------- Widget content
 .ace-editor, #project-file-tree {
   position: absolute;
   top: 0;

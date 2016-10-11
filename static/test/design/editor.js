@@ -18,4 +18,9 @@ $(document).ready(function () {
         sidebar.toggleClass('collapsed');
         $('body').toggleClass(sidebar.attr('id'));
     });
+
+    $('#compile-log .widget-title').click(function() {
+        var compile_log = $('#compile-log');
+        compile_log.toggleClass('collapsed');
+    });
 });
