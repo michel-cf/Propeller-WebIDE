@@ -1,4 +1,6 @@
 import logging
+
+from django_tables2 import RequestConfig
 from raven.contrib.django.raven_compat.models import client
 import os
 
@@ -15,7 +17,7 @@ from git import Repo
 
 from projects.forms import CreateProjectForm
 from projects.models import Project
-
+from projects.tables import MyProjectsTable, PublicProjectTable
 
 logger = logging.getLogger(__name__)
 
@@ -64,3 +66,17 @@ def editor(request, username, projectcode):
     return render(request, 'editor.html', {
         'project': project
     })
+
+
+def community(request):
+    queryset = Project.objects.filter(public=True)
+    table = PublicProjectTable(queryset)
+    RequestConfig(request, paginate={'per_page': 25}).configure(table)
+    return render(request, 'community.html', {'table': table})
+
+
+def my_projects(request):
+    queryset = Project.objects.filter(public=True)
+    table = MyProjectsTable(queryset)
+    RequestConfig(request, paginate={'per_page': 25}).configure(table)
+    return render(request, 'my_projects.html', {'table': table})

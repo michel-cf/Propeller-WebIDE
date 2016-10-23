@@ -10,6 +10,10 @@ class Project(models.Model):
     code = models.SlugField(max_length=255)
     name = models.CharField(max_length=255)
     git_path = models.CharField(max_length=2000)
+    public = models.BooleanField(default=False)
+    creation_date = models.DateTimeField()
+    last_change = models.DateTimeField()
 
     class Meta:
         unique_together = (('user', 'code'),)
+        ordering = ('-last_change',)

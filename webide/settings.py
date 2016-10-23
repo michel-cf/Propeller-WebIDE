@@ -67,6 +67,7 @@ INSTALLED_APPS = [
 
     'bootstrap3',
     'copyright',
+    'django_tables2',
 
     'webide',
     'projects',
