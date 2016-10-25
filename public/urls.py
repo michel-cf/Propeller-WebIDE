@@ -19,21 +19,10 @@ from django.utils.translation import ugettext_lazy
 
 import views
 
-app_name = 'webide'
+app_name = 'public'
 urlpatterns = [
-    # Plugins
-    url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('allauth.urls')),
-
-    # Index
-    url(r'^$', views.index),
-    url(r'^index.html$', views.index, name='index'),
-
-    # Apps
-    url(r'^public/', include('public.urls')),
-    url(r'^project/', include('projects.urls')),
+    url(r'^license.html$', views.license_page, name='license'),
+    url(r'^changelog.html$', views.changelog_page, name='changelog'),
+    url(r'^libraries.html$', views.libraries_page, name='libraries'),
+    url(r'^communicator.html$', views.communicator_download, name='communicator-download'),
 ]
-
-
-admin.site.site_header = ugettext_lazy('Propeller WebIDE admin')
-admin.site.site_title = ugettext_lazy('Propeller WebIDE administration')

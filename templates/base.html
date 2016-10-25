@@ -49,7 +49,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true">{{ user.username }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <!--          <li><a href="/blockly/profile">Profile</a></li> -->
+                                <li><a href="{% url 'account_change_password' %}">Change password</a></li>
                                 <!--     <li><a href="/blockly/public/profile">Public profile</a></li> -->
                                 <li><a href="{% url 'account_logout' %}">Logout</a></li>
                             </ul>
@@ -87,10 +87,10 @@
             <div class="container">
                 <div>
                     <ul class="nav navbar-nav">
-                        <li><a href="/blockly/public/license">License</a></li>
-                        <li><a href="/blockly/public/changelog">Change log</a></li>
-                        <li><a href="/blockly/public/libraries">External libraries</a></li>
-                        <li><a href="/blockly/public/clientdownload">BlocklyProp-client</a></li>
+                        <li><a href="{% url 'public:license' %}">License</a></li>
+                        <li><a href="{% url 'public:changelog' %}">Change log</a></li>
+                        <li><a href="{% url 'public:libraries' %}">External libraries</a></li>
+                        <li><a href="{% url 'public:communicator-download' %}">Propeller-communicator</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
 
