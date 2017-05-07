@@ -10,6 +10,8 @@ class Project(models.Model):
     code = models.SlugField()
     name = models.CharField(max_length=255)
     created = models.DateTimeField(auto_created=True)
+    last_change = models.DateTimeField(auto_now=True)
+    public = models.BooleanField(default=False)
 
     class Meta:
         unique_together = (('user', 'code'),)

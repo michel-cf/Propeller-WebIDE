@@ -1,4 +1,6 @@
 import logging
+
+from django_tables2 import RequestConfig
 from raven.contrib.django.raven_compat.models import client
 import os
 
@@ -9,9 +11,6 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.views.decorators.http import require_POST, require_GET
-
-# Create your views here.
-from git import Repo
 
 from projects.forms import CreateProjectForm
 from projects.models import Project
@@ -74,7 +73,7 @@ def community(request):
 
 
 def my_projects(request):
-    queryset = Project.objects.filter(public=True)
+    queryset = Project.objects.filter(user=request.user)
     table = MyProjectsTable(queryset)
     RequestConfig(request, paginate={'per_page': 25}).configure(table)
     return render(request, 'my_projects.html', {'table': table})

@@ -12,9 +12,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from django.views.decorators.http import require_POST, require_GET
 
-# Create your views here.
-from git import Repo
-
 from projects.forms import CreateProjectForm
 from projects.models import Project
 from projects.tables import MyProjectsTable, PublicProjectTable

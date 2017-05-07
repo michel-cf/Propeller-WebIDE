@@ -66,7 +66,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'bootstrap3',
-    'copyright',
     'django_tables2',
 
     'webide',
