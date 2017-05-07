@@ -5,7 +5,7 @@
 
     <p>Introductiontext</p>
 
-    <h2>List public profiles</h2>
+    <h2>Projects</h2>
 
     <ul id="project-list">
 
@@ -13,8 +13,12 @@
 
     {% if user.is_authenticated %}
         <a href="{% url 'projects:create' %}">Create new project</a>
-    <ul id="project-list">
 
+        <h2>Your latest projects</h2>
+    <ul id="project-list">
+{% for project in projects %}
+    <li><a href="{% url 'projects:project' project.user.username project.code %}">{{ project.name }}</a></li>
+    {% endfor %}
     </ul>
     {% endif %}
 
