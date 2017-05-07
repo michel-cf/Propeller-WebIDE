@@ -10,11 +10,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from django.views.decorators.http import require_POST, require_GET
 
-from projects.forms import CreateProjectForm
-from projects.models import Project, Branch
-
 # Create your views here.
+from git import Repo
 
+from projects.forms import CreateProjectForm
+from projects.models import Project
+from projects.tables import MyProjectsTable, PublicProjectTable
 
 logger = logging.getLogger(__name__)
 
@@ -29,17 +30,27 @@ def create(request):
             project = form.save(commit=False)
             project.user = request.user
 
-            project.save()
+            # Create GIT repository
+            project_directory = os.path.join(settings.WEBIDE_GIT_ROOT, project.user.username, project.code)
+            if not os.path.exists(project_directory):
+                try:
+                    # Create repo location
+                    os.makedirs(project_directory)
 
-            # Create master branch
-            branch = Branch()
-            branch.project = project
-            branch.code = 'master'
-            branch.name = 'master'
+                    # Create repo
+                    git_repo = Repo.init(project_directory)
 
-            branch.save()
+                    project.git_path = project_directory
+                    project.save()
 
-            return redirect('projects:project', project.user.username, project.code)
+                    return redirect('projects:project', project.user.username, project.code)
+                except OSError as ose:
+                    client.captureException()
+                    logger.error("Could not create project git directory", ose)
+            else:
+                logger.error("Could not create project git directory, directory already exists")
+
+            return HttpResponseServerError()
     # if a GET (or any other method) we'll create a blank form
     else:
         form = CreateProjectForm(request.user)
@@ -53,3 +64,17 @@ def editor(request, username, projectcode):
     return render(request, 'editor.html', {
         'project': project
     })
+
+
+def community(request):
+    queryset = Project.objects.filter(public=True)
+    table = PublicProjectTable(queryset)
+    RequestConfig(request, paginate={'per_page': 25}).configure(table)
+    return render(request, 'community.html', {'table': table})
+
+
+def my_projects(request):
+    queryset = Project.objects.filter(public=True)
+    table = MyProjectsTable(queryset)
+    RequestConfig(request, paginate={'per_page': 25}).configure(table)
+    return render(request, 'my_projects.html', {'table': table})

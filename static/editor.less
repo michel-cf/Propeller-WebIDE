@@ -24,13 +24,84 @@ html, body, #editor, #workspace {
   background-color: @second-color-back;
 }
 
+// ------------------- Top bar
+#state {
+  color: @second-color-back;
+}
+
+#project-settings {
+  position: absolute;
+  padding: 0;
+  width: 100%;
+  height: 10%;
+
+  #titles {
+    text-align: right;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+
+    h1 {
+      color: @main-color-back;
+    }
+
+    h2 {
+      color: @second-color-back;
+
+      #project-by {
+        color: @main-color-back;
+
+        #project-by-user {
+          color: @second-color-back;
+        }
+      }
+    }
+  }
+
+  #actions {
+    position: absolute;
+    margin: 10px;
+
+    .action-group {
+      float: left;
+      margin-left: 10px;
+      background-color: @main-color-back;
+
+
+
+      ul {
+        list-style-type: none;
+
+        li {
+          height: 60px;
+          float:left;
+          padding: 10px;
+
+          .action {
+            cursor: pointer;
+            height: 60px;
+          }
+        }
+      }
+    }
+
+    .action-group:first-child {
+      margin-left: 0;
+    }
+
+
+  }
+}
+
 // ------------------- Editor
 #editor {
   width: 100%;
+  top: 100px;
+  height: 90%;
 
   #workspace {
-    top: 10%;
-    height: 90%;
+    top: 0;
+    //height: 90%;
     bottom: 30px;
 
     #screen {

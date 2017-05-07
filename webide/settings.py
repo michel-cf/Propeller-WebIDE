@@ -66,8 +66,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'bootstrap3',
+    'copyright',
+    'django_tables2',
 
     'webide',
+    'public',
     'projects',
 ]
 
@@ -255,10 +258,14 @@ RAVEN_CONFIG = {
 handler = SentryHandler('https://16079d12cd38464c9fdf4fd6850913e7:7a7b85029608440687131e61e88a1fb7@sentry.io/53555')
 raven.setup_logging(handler)
 
+COPY_START_YEAR = 2016
+VERSION = 'v0.0.001'
+
 # Propeller WebIDE settings
 WEBIDE_GIT_ROOT = config.get("project", "root")
 
 # Export settings to use in templates
 SETTINGS_EXPORT = [
     'USE_CDN',
+    'VERSION',
 ]

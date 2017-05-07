@@ -23,4 +23,16 @@ $(document).ready(function () {
         var compile_log = $('#compile-log');
         compile_log.toggleClass('collapsed');
     });
+
+    resize();
 });
+
+function resize() {
+    $("#editor").height($(window).height() - 100);
+}
+
+$( window ).resize(function() {
+    resize();
+});
+
+resize();

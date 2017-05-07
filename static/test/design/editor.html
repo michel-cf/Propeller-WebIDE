@@ -7,7 +7,7 @@
     <script src="../../libs/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../libs/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../libs/jstree/dist/jstree.js" type="text/javascript" charset="utf-8"></script>
-    <link rel="stylesheet" href="../../libs/jstree/dist/themes/default/style.css" />
+    <link rel="stylesheet" href="../../libs/jstree/dist/themes/default/style.css"/>
     <script src="editor.js"></script>
 
     <link rel="stylesheet" type="text/css" href="../../editor.css"/>
@@ -15,7 +15,28 @@
 <body class="no-explorer terminal">
 
 
-<div id="project-settings"></div>
+<div id="project-settings">
+    <div id="actions">
+        <div class="action-group">
+            <ul>
+                <li><img src="../../libs/icons/text-editor-set/png/file-1.png" class="action"/></li>
+            </ul>
+        </div>
+        <div class="action-group">
+            <ul>
+                <li><img src="../../libs/icons/text-editor-set/png/save.png" class="action"/></li>
+                <li><img src="../../libs/icons/text-editor-set/png/save-1.png" class="action"/></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="titles">
+        <h1>Propeller-WebIDE <span id="state">TEST</span></h1>
+        <h2>Project name<span id="project-by"> by <span id="project-by-user">Michel</span></span></h2>
+    </div>
+
+
+</div>
 
 
 <div id="editor">
@@ -41,7 +62,7 @@
             <div id="main-editor" class="widget-container width-6">
                 <div class="widget">
                     <div class="widget-title"><h4>Editor: <span id="main-editor-filename"
-                                                            class="filename">file.c</span></h4></div>
+                                                                class="filename">file.c</span></h4></div>
                     <div class="widget-content">
                         <div id="ace-main-editor" class="ace-editor">Hallo</div>
                     </div>
@@ -50,7 +71,7 @@
             <div id="second-editor" class="widget-container width-6">
                 <div class="widget">
                     <div class="widget-title"><h4>Editor: <span id="second-editor-filename"
-                                                            class="filename">file.h</span></h4></div>
+                                                                class="filename">file.h</span></h4></div>
                     <div class="widget-content">
                         <div id="ace-second-editor" class="ace-editor">Hallo</div>
                     </div>

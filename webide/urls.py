@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^index.html$', views.index, name='index'),
 
     # Apps
+    url(r'^public/', include('public.urls')),
     url(r'^project/', include('projects.urls')),
 ]
 
