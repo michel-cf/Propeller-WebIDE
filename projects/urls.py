@@ -22,7 +22,7 @@ import views
 app_name = 'projects'
 urlpatterns = [
     url(r'^create.html$', views.create, name='create'),
-    url(r'^(?P<username>[\w-]+)/(?P<projectcode>[\w-]+)$', views.editor, name='project'),
+    url(r'^(?P<username>[\w-]+)/(?P<project_code>[\w-]+)$', views.editor, name='project'),
     url(r'^public.html$', views.community, name='community'),
     url(r'^myprojects.html$', views.my_projects, name='my_projects'),
 ]

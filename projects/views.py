@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST, require_GET
 
 from projects.forms import CreateProjectForm
-from projects.models import Project
+from projects.models import Project, Branch, Revision
 from projects.tables import MyProjectsTable, PublicProjectTable
 
 logger = logging.getLogger(__name__)
@@ -28,28 +28,25 @@ def create(request):
         if form.is_valid():
             project = form.save(commit=False)
             project.user = request.user
+            project.save()
 
-            # Create GIT repository
-            project_directory = os.path.join(settings.WEBIDE_GIT_ROOT, project.user.username, project.code)
-            if not os.path.exists(project_directory):
-                try:
-                    # Create repo location
-                    os.makedirs(project_directory)
+            branch = Branch()
+            branch.project = project
+            branch.code = 'master'
+            branch.name = 'Master'
+            branch.save()
 
-                    # Create repo
-                    git_repo = Repo.init(project_directory)
+            project.active_branch = branch
+            project.save()
 
-                    project.git_path = project_directory
-                    project.save()
+            revision = Revision()
+            revision.branch = branch
+            revision.save()
 
-                    return redirect('projects:project', project.user.username, project.code)
-                except OSError as ose:
-                    client.captureException()
-                    logger.error("Could not create project git directory", ose)
-            else:
-                logger.error("Could not create project git directory, directory already exists")
+            branch.head = revision
+            branch.save()
 
-            return HttpResponseServerError()
+            return redirect('projects:project', project.user.username, project.code)
     # if a GET (or any other method) we'll create a blank form
     else:
         form = CreateProjectForm(request.user)
@@ -58,8 +55,8 @@ def create(request):
     return render(request, 'create.html', {'form': form})
 
 
-def editor(request, username, projectcode):
-    project = get_object_or_404(Project, user__username=username, code=projectcode)
+def editor(request, username, project_code):
+    project = get_object_or_404(Project, user__username=username, code=project_code)
     return render(request, 'editor.html', {
         'project': project
     })

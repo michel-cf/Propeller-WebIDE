@@ -9,9 +9,10 @@ class Project(models.Model):
     user = models.ForeignKey(User, related_name='projects')
     code = models.SlugField()
     name = models.CharField(max_length=255)
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_now_add=True)
     last_change = models.DateTimeField(auto_now=True)
     public = models.BooleanField(default=False)
+    active_branch = models.ForeignKey('Branch', related_name='project_active_branch', null=True)
 
     class Meta:
         unique_together = (('user', 'code'),)
@@ -21,6 +22,7 @@ class Branch(models.Model):
     project = models.ForeignKey(Project, related_name='branches')
     code = models.SlugField()
     name = models.CharField(max_length=255)
+    head = models.ForeignKey('Revision', related_name='branch_head_revision', null=True)
 
     class Meta:
         unique_together = (('project', 'name'),)
