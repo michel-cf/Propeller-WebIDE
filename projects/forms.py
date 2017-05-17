@@ -13,14 +13,14 @@ class CreateProjectForm(forms.ModelForm):
         return self.cleaned_data['name'].strip()
 
     def clean_code(self):
-        code = self.cleaned_data['code']
+        code = self.cleaned_data['code'].strip().lower().replace(' ', '_')
         if Project.objects.filter(user=self.user, code=code).exists():
             raise ValidationError('A project with this code already exists')
         return code
 
     class Meta:
         model = Project
-        fields = ['name', 'code']
+        fields = ['name', 'code', 'public']
 
 
 class CreateProjectFormBasic(forms.Form):
