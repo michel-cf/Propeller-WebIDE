@@ -30,7 +30,7 @@ class Branch(models.Model):
 
 class File(models.Model):
     previous = models.ForeignKey('File', related_name='new_file_revisions', null=True)
-    path = models.CharField(max_length=1000)
+    path = models.CharField(max_length=1000, default='')
     filename = models.CharField(max_length=255)
     file = models.TextField()
     mime = models.CharField(max_length=255)

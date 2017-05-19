@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST, require_GET
 
 from projects.forms import CreateProjectForm
-from projects.models import Project, Branch, Revision
+from projects.models import Project, Branch, Revision, File
 from projects.tables import MyProjectsTable, PublicProjectTable
 
 logger = logging.getLogger(__name__)
@@ -45,6 +45,15 @@ def create(request):
 
             branch.head = revision
             branch.save()
+
+            readme_file = File()
+            readme_file.filename = 'README.md'
+            readme_file.file = '# %s\n' % project.name
+            readme_file.mime = 'text/markdown'
+            readme_file.save()
+
+            revision.files.add(readme_file)
+            revision.save()
 
             return redirect('projects:project', project.user.username, project.code)
     # if a GET (or any other method) we'll create a blank form

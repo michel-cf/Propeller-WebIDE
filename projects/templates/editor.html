@@ -4,6 +4,15 @@
 
     <h2>Project: {{ project.name }}</h2>
 
+    <div>
+        <h3>Files</h3>
+        <ul>
+            {% for file in project.active_branch.head.files.all %}
+                <li><a href="#{{ file.filename }}">{{ file.filename }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
 
 
 {% endblock %}
