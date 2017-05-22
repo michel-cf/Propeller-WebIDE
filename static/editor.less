@@ -4,8 +4,7 @@
 
 // ----------------- reset and init
 * {
-  margin: 0;
-  padding: 0;
+    padding: 0;
 }
 
 html, body, #editor, #workspace {
@@ -99,16 +98,20 @@ html, body, #editor, #workspace {
   top: 100px;
   height: 90%;
 
+  * {
+    margin: 0;
+  }
+
   #workspace {
     top: 0;
     //height: 90%;
-    bottom: 30px;
+    bottom: 60px;
 
     #screen {
       top: 0;
       left: 50px;
       right: 50px;
-      bottom: 50px;
+      bottom: 90px;
       position: absolute;
 
       .widget-container {
@@ -119,158 +122,159 @@ html, body, #editor, #workspace {
       }
     }
   }
-}
 
-#screen #second-editor.widget-container {
-  float: right;
-}
+  #screen #second-editor.widget-container {
+    float: right;
+  }
 
-body.left-side-bar #editor #workspace #screen {
-  left: 220px;
-}
+  body.left-side-bar #editor #workspace #screen {
+    left: 220px;
+  }
 
-body.right-side-bar #editor #workspace #screen {
-  right: 220px;
-}
+  body.right-side-bar #editor #workspace #screen {
+    right: 220px;
+  }
 
-// ----------------------------- sidebar
-.sidebar {
-  z-index: 10;
-  display: block;
-  top: 0;
-  bottom: 80px;
-  width: 200px;
-  position: absolute;
-  border-bottom: 5px solid #ffffff;
-
-  .sidebar-title {
-    position: relative;
+  // ----------------------------- sidebar
+  .sidebar {
+    z-index: 10;
+    display: block;
+    top: 0;
+    bottom: 100px;
     width: 200px;
-    height: 30px;
-    overflow: hidden;
-    cursor: pointer;
-
-    h4 {
-      padding-left: 10px;
-      padding-top: 8px;
-    }
-  }
-
-  .sidebar-content {
     position: absolute;
-    top: 30px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-}
+    border-bottom: 5px solid #ffffff;
 
-.sidebar.collapsed {
-  width: 30px;
-
-  .sidebar-title {
-    width: 30px;
-    height: 100%;
-
-    h4 {
+    .sidebar-title {
       position: relative;
-      // -webkit-transform: rotate(-90deg);
-      // -moz-transform: rotate(-90deg);
-      // -ms-transform: rotate(-90deg);
-      // -o-transform: rotate(-90deg);
-      transform: rotate(-90deg);
+      width: 200px;
+      height: 30px;
+      overflow: hidden;
+      cursor: pointer;
 
-      /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
-      // -webkit-transform-origin: 0% 50%;
-      // -moz-transform-origin: 50% 50%;
-      // -ms-transform-origin: 50% 50%;
-      // -o-transform-origin: 50% 50%;
-      transform-origin: right bottom;
-      // transform: rotate(270deg);
-      // transform-origin: left top 0;
+      h4 {
+        padding-left: 10px;
+        padding-top: 8px;
+      }
+    }
 
-
-      margin-left: -200px;
-      padding-bottom: 5px;
-      text-align: right;
-      // margin-bottom: 200px;
+    .sidebar-content {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      bottom: 0;
+      left: 0;
     }
   }
 
-  .sidebar-content {
-    display: none;
-  }
-}
+  .sidebar.collapsed {
+    width: 30px;
 
-#left-side-bar {
-  float: left;
-}
+    .sidebar-title {
+      width: 30px;
+      height: 100%;
 
-#right-side-bar {
-  right: 0;
-}
+      h4 {
+        position: relative;
+        // -webkit-transform: rotate(-90deg);
+        // -moz-transform: rotate(-90deg);
+        // -ms-transform: rotate(-90deg);
+        // -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
 
-// ----------------------------- Widget
-.widget-container.width-6 {
-  width: 50%;
-}
+        /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+        // -webkit-transform-origin: 0% 50%;
+        // -moz-transform-origin: 50% 50%;
+        // -ms-transform-origin: 50% 50%;
+        // -o-transform-origin: 50% 50%;
+        transform-origin: right bottom;
+        // transform: rotate(270deg);
+        // transform-origin: left top 0;
 
-.widget {
-  height: 100%;
-  position: relative;
+        margin-left: -200px;
+        padding-bottom: 5px;
+        text-align: right;
+        // margin-bottom: 200px;
+      }
+    }
 
-  .widget-title {
-    height: 30px;
-    width: 100%;
-
-    h4 {
-      padding-left: 10px;
-      padding-top: 8px;
+    .sidebar-content {
+      display: none;
     }
   }
 
-  .widget-content {
+  #left-side-bar {
+    float: left;
+  }
+
+  #right-side-bar {
+    right: 0;
+  }
+
+  // ----------------------------- Widget
+  .widget-container.width-6 {
+    width: 50%;
+  }
+
+  .widget {
+    height: 100%;
+    position: relative;
+
+    .widget-title {
+      height: 30px;
+      width: 100%;
+
+      h4 {
+        padding-left: 10px;
+        padding-top: 8px;
+      }
+    }
+
+    .widget-content {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  #second-editor .widget {
+    margin-left: 10px;
+  }
+
+  // ----------------------------- Compile log
+  #compile-log {
     position: absolute;
-    top: 30px;
+    width: 80%;
+    bottom: 52px;
+    left: 10%;
+    height: 60%;
+    z-index: 20;
+    border: 5px solid #ffffff;
+    border-bottom: none;
+
+    .widget-title {
+      cursor: pointer;
+    }
+  }
+
+  #compile-log.collapsed {
+    height: 30px;
+    bottom: 57px;
+
+    .widget-content {
+      display: none;
+    }
+  }
+
+  // ----------------------------- Widget content
+  .ace-editor, #project-file-tree {
+    position: absolute;
+    top: 0;
     right: 0;
     bottom: 0;
     left: 0;
   }
-}
 
-#second-editor .widget {
-  margin-left: 10px;
-}
-
-// ----------------------------- Compile log
-#compile-log {
-  position: absolute;
-  width: 80%;
-  bottom: 0;
-  left: 10%;
-  height: 60%;
-  z-index: 20;
-  border: 5px solid #ffffff;
-  border-bottom: none;
-
-  .widget-title {
-    cursor: pointer;
-  }
-}
-
-#compile-log.collapsed {
-  height: 30px;
-
-  .widget-content {
-    display: none;
-  }
-}
-
-// ----------------------------- Widget content
-.ace-editor, #project-file-tree {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
