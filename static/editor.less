@@ -92,6 +92,14 @@ html, body, #editor, #workspace {
   }
 }
 
+body.left-side-bar #editor #workspace #screen {
+    left: 220px;
+}
+
+body.right-side-bar #editor #workspace #screen {
+    right: 220px;
+}
+
 // ------------------- Editor
 #editor {
   width: 100%;
@@ -125,14 +133,6 @@ html, body, #editor, #workspace {
 
   #screen #second-editor.widget-container {
     float: right;
-  }
-
-  body.left-side-bar #editor #workspace #screen {
-    left: 220px;
-  }
-
-  body.right-side-bar #editor #workspace #screen {
-    right: 220px;
   }
 
   // ----------------------------- sidebar
@@ -214,6 +214,10 @@ html, body, #editor, #workspace {
   // ----------------------------- Widget
   .widget-container.width-6 {
     width: 50%;
+  }
+
+  .widget-container.width-12 {
+    width: 100%;
   }
 
   .widget {

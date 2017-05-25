@@ -51,11 +51,33 @@ def create(request):
             readme_file.file = '# %s\n' % project.name
             readme_file.mime = 'text/markdown'
             readme_file.save()
-
             revision.files.add(readme_file)
+
+            side_config_file = File()
+            side_config_file.filename = '%s.side' % project.code
+            side_config_file.file = '%s.c\n' % project.code
+            side_config_file.mime = 'text/plain'
+            side_config_file.save()
+            revision.files.add(side_config_file)
+
+            main_source_file = File()
+            main_source_file.filename = '%s.c' % project.code
+            main_source_file.file = """// ------ Libraries and Definitions ------
+#include "simpletools.h"
+
+
+// ------ Main Program ------
+int main()
+{
+}
+"""
+            main_source_file.mime = 'text/x-c'
+            main_source_file.save()
+            revision.files.add(main_source_file)
+
             revision.save()
 
-            return redirect('projects:project', project.user.username, project.code)
+            return redirect('projects:project', project.user.username, project.code, 'master')
     # if a GET (or any other method) we'll create a blank form
     else:
         form = CreateProjectForm(request.user)
@@ -64,10 +86,12 @@ def create(request):
     return render(request, 'create.html', {'form': form})
 
 
-def editor(request, username, project_code):
+def editor(request, username, project_code, branch_code):
     project = get_object_or_404(Project, user__username=username, code=project_code)
+    branch = get_object_or_404(Branch, project=project, code=branch_code)
     return render(request, 'editor.html', {
-        'project': project
+        'project': project,
+        'branch': branch
     })
 
 

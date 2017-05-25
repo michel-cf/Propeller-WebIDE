@@ -6,14 +6,17 @@
     {% if settings.USE_CDN %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/screenfull.js/3.2.0/screenfull.min.js"  type="text/javascript"></script>
     {% else %}
         <!-- TODO: local scripts -->
         <link rel="stylesheet" href="{% static 'libs/jstree/dist/themes/default/style.css' %}"/>
         <script src="{% static 'libs/jstree/dist/jstree.js' %}" type="text/javascript"
                 charset="utf-8"></script>
+        <script src="{% static 'libs/screenfull.js' %}" type="text/javascript"></script>
     {% endif %}
 
     <script src="{% static 'libs/ace/src-noconflict/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+
     <link rel="stylesheet" href="{% static 'editor.css' %}"/>
     <script src="{% static 'editor.js' %}" type="text/javascript"
                 charset="utf-8"></script>
@@ -45,7 +48,7 @@
             </div>
 
             <div id="screen">
-                <div id="main-editor" class="widget-container width-6">
+                <div id="main-editor" class="widget-container width-12">
                     <div class="widget">
                         <div class="widget-title"><h4>Editor: <span id="main-editor-filename"
                                                                     class="filename">file.c</span></h4></div>
@@ -54,12 +57,12 @@
                         </div>
                     </div>
                 </div>
-                <div id="second-editor" class="widget-container width-6">
+                <div id="second-editor" class="widget-container width-6 hidden">
                     <div class="widget">
                         <div class="widget-title"><h4>Editor: <span id="second-editor-filename"
                                                                     class="filename">file.h</span></h4></div>
                         <div class="widget-content">
-                            <div id="ace-second-editor" class="ace-editor">Hallo</div>
+                            <div id="ace-second-editor" class="ace-editor"></div>
                         </div>
                     </div>
                 </div>

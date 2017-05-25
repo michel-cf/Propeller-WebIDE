@@ -11,7 +11,13 @@ $(document).ready(function () {
     second_editor.setTheme("ace/theme/chrome");
     second_editor.getSession().setMode("ace/mode/c_cpp");
 
-    $('#project-file-tree').jstree();
+    $('#project-file-tree').on('select_node.jstree', function (e, data) {
+        document.location = data.node.a_attr.href;
+  }).jstree({
+        "core" : {
+    "multiple" : false
+  }
+    });
 
     $('.sidebar-title').click(function() {
         var sidebar = $(this).parent();
@@ -23,6 +29,14 @@ $(document).ready(function () {
         var compile_log = $('#compile-log');
         compile_log.toggleClass('collapsed');
     });
+
+    if (screenfull.enabled) {
+        $('#fullscreen').click(function (event) {
+            event.preventDefault();
+            screenfull.toggle();
+            return false;
+        }).removeClass('hidden');
+    }
 
     resize();
 });
